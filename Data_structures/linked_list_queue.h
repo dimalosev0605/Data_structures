@@ -39,7 +39,9 @@ private:
     void move_from(Linked_list_queue& rhs) {
         head = rhs.head;
         tail = rhs.tail;
+        m_size = rhs.m_size;
         rhs.head = nullptr;
+        rhs.m_size = 0;
     }
 
 public:
