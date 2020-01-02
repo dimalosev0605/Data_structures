@@ -24,4 +24,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     linked_list_stack.h \
-    linked_list_queue.h
+    linked_list_queue.h \
+    forward_list.h
