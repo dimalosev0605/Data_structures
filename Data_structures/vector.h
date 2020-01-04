@@ -21,14 +21,14 @@ private:
         else {
             new_space = new T[m_size * 2];
         }
-        for(size_t i = 0; i < m_size; ++i) new_space[i] = std::move(data[i]);
+        for(size_t i = 0; i < m_size; ++i) new_space[i] = data[i];
         delete [] data;
         data = new_space;
         m_capacity = m_size;
     }
     void copy_from(const Vector& rhs) {
         data = new T[rhs.m_size + rhs.m_capacity];
-        for(size_t i = 0; i < rhs.m_size; ++i) data[i] = std::move(rhs[i]);
+        for(size_t i = 0; i < rhs.m_size; ++i) data[i] = rhs[i];
         m_size = rhs.m_size;
         m_capacity = rhs.m_capacity;
     }
