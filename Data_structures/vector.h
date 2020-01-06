@@ -38,7 +38,7 @@ private:
         rhs.m_size = 0;
         rhs.m_capacity = 0;
     }
-    void check(size_t index) { if(index >= m_size || index < 0) throw std::out_of_range("Out of range error"); }
+    void check(size_t index) const { if(index >= m_size || index < 0) throw std::out_of_range("Out of range error"); }
 
 public:
     size_t size() const { return m_size; }
