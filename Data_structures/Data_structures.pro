@@ -28,4 +28,5 @@ HEADERS += \
     linked_list_queue.h \
     forward_list.h \
     vector.h \
-    my_string.h
+    my_string.h \
+    list.h
