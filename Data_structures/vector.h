@@ -21,7 +21,7 @@ private:
         else {
             new_space = new T[m_size * 2];
         }
-        for(size_t i = 0; i < m_size; ++i) new_space[i] = data[i];
+        for(size_t i = 0; i < m_size; ++i) new_space[i] = move(data[i]);
         delete [] data;
         data = new_space;
         m_capacity = m_size;

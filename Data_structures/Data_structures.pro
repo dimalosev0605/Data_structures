@@ -29,4 +29,5 @@ HEADERS += \
     forward_list.h \
     vector.h \
     my_string.h \
-    list.h
+    list.h \
+    priority_queue.h
