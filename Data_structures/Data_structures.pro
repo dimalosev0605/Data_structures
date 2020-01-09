@@ -30,4 +30,5 @@ HEADERS += \
     vector.h \
     my_string.h \
     list.h \
-    priority_queue.h
+    priority_queue.h \
+    bst.h
