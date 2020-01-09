@@ -46,7 +46,7 @@ private:
 
 public:
     bool empty() const { return head == nullptr; }
-    int size() const { return size; }
+    int size() const { return m_size; }
     void push(const T& item) {
         Node* t = tail;
         tail = new Node(item);

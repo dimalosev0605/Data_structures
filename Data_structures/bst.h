@@ -65,7 +65,7 @@ class Bst
     }
     T find_r(Node*& h, const T& item) {
         if(h == nullptr) return T();
-        if(h ->item == item) return h->item;
+        if(h->item == item) return h->item;
         if(item < h->item)
             find_r(h->l, item);
         else
@@ -87,6 +87,46 @@ class Bst
         sz = rhs.sz;
         rhs.head = nullptr;
         rhs.sz = 0;
+    }
+    int height_r(Node*& h) {
+        if(h == nullptr) return -1;
+        int u = height_r(h->l);
+        int v = height_r(h->r);
+        if(u > v)
+            return u + 1;
+        else
+            return v + 1;
+    }
+    Node* find_min(Node* h) {
+        while(h->l != nullptr) h = h->l;
+        return h;
+    }
+    Node* delete_item_r(Node* h, const T& item) {
+        if(h == nullptr) return h;
+        else if(item < h->item) h->l = delete_item_r(h->l, item);
+        else if(item > h->item) h->r = delete_item_r(h->r, item);
+        else {
+            if(h->l == nullptr && h->r == nullptr) {
+                delete h;
+                h = nullptr;
+            }
+            else if(h->l == nullptr) {
+                Node* t = h;
+                h = h->r;
+                delete t;
+            }
+            else if(h->r == nullptr) {
+                Node* t = h;
+                h = h->l;
+                delete t;
+            }
+            else {
+                Node* t = find_min(h->r);
+                h->item = t->item;
+                h->r = delete_item_r(h->r, t->item);
+            }
+        }
+        return h;
     }
 
 public:
@@ -145,9 +185,27 @@ public:
         head = nullptr;
         sz = 0;
     }
-    T find(const T& item) {
-        return find_r(head, item);
+    T find(const T& item) { return find_r(head, item); }
+    int height_recursive() { return height_r(head); }
+    int height_non_recursive() const {
+        if(head == nullptr) return 0;
+        Linked_list_queue<Node*> q;
+        q.push(head);
+        int height = 0;
+        while(1) {
+            int node_count = q.size();
+            if(node_count == 0) return height - 1;
+            ++height;
+            while(node_count > 0) {
+                Node* node = q.front();
+                q.pop();
+                if(node->l != nullptr) q.push(node->l);
+                if(node->r != nullptr) q.push(node->r);
+                --node_count;
+            }
+        }
     }
+    void delete_item(const T& item) { head = delete_item_r(head, item); }
 };
 
 #endif // BST_H
