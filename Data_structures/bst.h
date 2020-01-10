@@ -81,6 +81,7 @@ class Bst
     }
     void copy_from(const Bst& rhs) {
         head = copy_r(rhs.head);
+        sz = rhs.sz;
     }
     void move_from(Bst& rhs) {
         head = rhs.head;

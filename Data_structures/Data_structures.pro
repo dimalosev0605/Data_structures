@@ -31,4 +31,5 @@ HEADERS += \
     my_string.h \
     list.h \
     priority_queue.h \
-    bst.h
+    bst.h \
+    rb_tree.h
