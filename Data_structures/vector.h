@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+namespace Data_structures {
+
 template<typename T>
 class Vector
 {
@@ -21,7 +23,7 @@ private:
         else {
             new_space = new T[m_size * 2];
         }
-        for(size_t i = 0; i < m_size; ++i) new_space[i] = move(data[i]);
+        for(size_t i = 0; i < m_size; ++i) new_space[i] = std::move(data[i]);
         delete [] data;
         data = new_space;
         m_capacity = m_size;
@@ -152,5 +154,8 @@ public:
     }
     ~Vector() { clear();}
 };
+
+}
+
 
 #endif // VECTOR_H

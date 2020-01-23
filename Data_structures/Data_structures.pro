@@ -32,4 +32,5 @@ HEADERS += \
     list.h \
     priority_queue.h \
     bst.h \
-    rb_tree.h
+    rb_tree.h \
+    hash_table.h

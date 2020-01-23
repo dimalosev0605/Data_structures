@@ -20,7 +20,7 @@ My_string::My_string(const My_string &rhs)
     copy_from(rhs);
 }
 
-My_string &My_string::operator=(const My_string &rhs)
+My_string& My_string::operator=(const My_string &rhs)
 {
     if(this == &rhs) return *this;
     char* p = short_max < sz ? ptr : nullptr;
@@ -34,7 +34,7 @@ My_string::My_string(My_string &&rhs)
     move_from(rhs);
 }
 
-My_string &My_string::operator=(My_string &&rhs)
+My_string& My_string::operator=(My_string &&rhs)
 {
     if(this == &rhs) return *this;
     if(short_max < sz) delete [] ptr;
@@ -47,7 +47,7 @@ My_string::~My_string()
     if(sz > short_max) delete [] ptr;
 }
 
-const char *My_string::c_str() const
+const char* My_string::c_str() const
 {
     return ptr;
 }
@@ -75,7 +75,7 @@ void My_string::clear()
     ptr = ch;
 }
 
-char &My_string::operator[](size_t n)
+char& My_string::operator[](size_t n)
 {
     return ptr[n];
 }
@@ -85,7 +85,7 @@ const char& My_string::operator[](size_t n) const
     return ptr[n];
 }
 
-char &My_string::at(size_t n)
+char& My_string::at(size_t n)
 {
     check(n);
     return ptr[n];
@@ -97,22 +97,22 @@ const char& My_string::at(size_t n) const
     return ptr[n];
 }
 
-char &My_string::back()
+char& My_string::back()
 {
     return ptr[sz - 1];
 }
 
-const char &My_string::back() const
+const char& My_string::back() const
 {
     return ptr[sz - 1];
 }
 
-char &My_string::front()
+char& My_string::front()
 {
     return ptr[0];
 }
 
-const char &My_string::front() const
+const char& My_string::front() const
 {
     return ptr[0];
 }
@@ -127,7 +127,7 @@ void My_string::pop_back()
     ptr[--sz] = 0;
 }
 
-My_string &My_string::operator+=(char c)
+My_string& My_string::operator+=(char c)
 {
     add_char(c);
     return *this;
@@ -162,7 +162,7 @@ void My_string::move_from(My_string &rhs)
     }
 }
 
-char *My_string::expand(const char *ptr, size_t n)
+char* My_string::expand(const char *ptr, size_t n)
 {
     char* p = new char[n];
     strcpy(p, ptr);

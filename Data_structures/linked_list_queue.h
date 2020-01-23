@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+namespace Data_structures {
+
 template<typename T>
 class Linked_list_queue
 {
@@ -91,6 +93,9 @@ public:
     }
     ~Linked_list_queue() { clear(); }
 };
+
+}
+
 
 
 #endif // LINKED_LIST_QUEUE_H

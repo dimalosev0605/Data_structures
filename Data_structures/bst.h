@@ -4,6 +4,8 @@
 #include <iostream>
 #include <linked_list_queue.h>
 
+namespace Data_structures {
+
 template<typename T>
 class Bst
 {
@@ -208,5 +210,8 @@ public:
     }
     void delete_item(const T& item) { head = delete_item_r(head, item); }
 };
+
+}
+
 
 #endif // BST_H

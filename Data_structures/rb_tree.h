@@ -4,6 +4,8 @@
 #include <iostream>
 #include <linked_list_queue.h>
 
+namespace Data_structures {
+
 template<typename T>
 class RB_Tree
 {
@@ -166,5 +168,8 @@ public:
         sz = 0;
     }
 };
+
+}
+
 
 #endif // RB_TREE_H

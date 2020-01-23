@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+namespace Data_structures {
+
 template<typename T>
 class Linked_list_stack
 {
@@ -94,5 +96,8 @@ public:
     }
     ~Linked_list_stack() { clear(); }
 };
+
+}
+
 
 #endif // LINKED_LIST_STACK_H

@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+namespace Data_structures {
+
 template<typename T>
 class Forward_list
 {
@@ -161,20 +163,56 @@ public:
         head = max;
         head->next = temp;
     }
-    void sort() {
-        set_max_in_head();
-        Node* t = head->next;
-        head->next = nullptr;
-//        while(t) {
-//            Node* next = t->next;
 
-//            for(Node* i = head; i != nullptr; i = i->next) {
-//                if() {
-//                }
-//            }
-//            t = next;
-//        }
+    void split(Node* l, Node** front, Node** back) {
+        Node* fast;
+        Node* slow;
+        slow = l;
+        fast = l->next;
+        while(fast) {
+            fast = fast->next;
+            while(fast) {
+                slow = slow->next;
+                fast = fast->next;
+            }
+        }
+        *front = l;
+        *back = slow->next;
+        slow->next = nullptr;
     }
+
+    Node* sorted_merge(Node* a, Node* b) {
+        Node* res = nullptr;
+        if(a == nullptr)
+            return b;
+        if(b == nullptr)
+            return a;
+        if(a->item <= b->item) {
+            res = a;
+            res->next = sorted_merge(a->next, b);
+        }
+        else {
+            res = b;
+            res->next = sorted_merge(a, b->next);
+        }
+        return res;
+    }
+
+    void sort() {
+        sort_r(&head);
+    }
+
+    void sort_r(Node** h) {
+        Node* head = *h;
+        Node* a;
+        Node* b;
+        if(!head || !head->next) return;
+        split(head, &a, &b);
+        sort_r(&a);
+        sort_r(&b);
+        *h = sorted_merge(a, b);
+    }
+
     Forward_list() = default;
     Forward_list(const Forward_list& rhs) { copy_from(rhs); }
     Forward_list& operator=(const Forward_list& rhs) {
@@ -192,5 +230,7 @@ public:
     }
     ~Forward_list() { clear(); }
 };
+
+}
 
 #endif // FORWARD_LIST_H

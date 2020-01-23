@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+namespace Data_structures {
+
 template<typename T>
 class List
 {
@@ -203,38 +205,9 @@ public:
             t = t->next;
         }
     }
-    void sort() {
-        // set min elem in head
-        if(!sz) return;
-        Node* min = head;
-        Node* t = head->next;
-        while(t) {
-            if(t->item < min->item) min = t;
-            t = t->next;
-        }
-        if(min == head) return;
-        if(min == tail) {
-            Node* new_tail = tail->previous;
-            Node* old_head = head;
-            head->previous = tail;
-            head = tail;
-            head->previous = nullptr;
-            head->next = old_head;
-            tail = new_tail;
-            tail->next = nullptr;
-            return;
-        }
-        min->previous->next = min->next;
-        min->next->previous = min->previous;
-        Node* temp = head;
-        temp->previous = min;
-        head = min;
-        min->previous = nullptr;
-        min->next = temp;
-
-        //TO DO: now sorting...
-
-    }
 };
+
+}
+
 
 #endif // LIST_H

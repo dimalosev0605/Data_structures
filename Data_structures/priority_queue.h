@@ -1,6 +1,10 @@
 #ifndef PRIORITY_QUEUE_H
 #define PRIORITY_QUEUE_H
 
+#include <utility>
+
+namespace Data_structures {
+
 template<typename T>
 class Priority_queue
 {
@@ -28,7 +32,7 @@ private:
     }
     void expand() {
         T* new_space = new T[items_count << 1];
-        for(size_t i = 0; i < items_count + 1; ++i) new_space[i] = move(data[i]);
+        for(size_t i = 0; i < items_count + 1; ++i) new_space[i] = std::move(data[i]);
         delete [] data;
         data = new_space;
         mem_size = items_count - 1;
@@ -86,5 +90,8 @@ public:
         data[items_count--].~T();
     }
 };
+
+}
+
 
 #endif // PRIORITY_QUEUE_H
