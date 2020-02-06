@@ -2,6 +2,7 @@
 #define VECTOR_H
 
 #include <iostream>
+#include <exception>
 
 namespace Data_structures {
 
@@ -27,12 +28,6 @@ private:
         delete [] data;
         data = new_space;
         m_capacity = m_size;
-    }
-    void copy_from(const Vector& rhs) {
-        data = new T[rhs.m_size + rhs.m_capacity];
-        for(size_t i = 0; i < rhs.m_size; ++i) data[i] = rhs[i];
-        m_size = rhs.m_size;
-        m_capacity = rhs.m_capacity;
     }
     void move_from(Vector& rhs) {
         memcpy(this, &rhs, sizeof(Vector));
@@ -138,21 +133,31 @@ public:
         std::cout << "\n###########Vector padding###########\n";
     }
     Vector() = default;
-    Vector(const Vector& rhs) { copy_from(rhs); }
+    Vector(const Vector& rhs) {
+        data = new (std::nothrow) T[rhs.m_size + rhs.m_capacity];
+        if(!data) return;
+        for(size_t i = 0; i < rhs.m_size; ++i) data[i] = rhs[i];
+        m_size = rhs.m_size;
+        m_capacity = rhs.m_capacity;
+    }
     Vector& operator=(const Vector& rhs) {
-        if(this == &rhs) return *this;
-        if(m_size) clear();
-        copy_from(rhs);
+        T* old = data;
+        data = new (std::nothrow) T[rhs.m_size + rhs.m_capacity];
+        if(data) {
+            for(size_t i = 0; i < rhs.m_size; ++i) data[i] = rhs[i];
+            m_size = rhs.m_size;
+            m_capacity = rhs.m_capacity;
+            delete [] old;
+        }
         return *this;
     }
     Vector(Vector&& rhs) { move_from(rhs); }
     Vector& operator=(Vector&& rhs) {
-        if(this == &rhs) return *this;
-        if(m_size) clear();
+        delete [] data;
         move_from(rhs);
         return *this;
     }
-    ~Vector() { clear();}
+    ~Vector() { delete [] data; }
 };
 
 }
