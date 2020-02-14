@@ -135,6 +135,13 @@ public:
         right->~T();
         --item_count;
     }
+    template<typename... Args>
+    void emplace_back(Args&&... args) {
+        check_for_expand();
+        new (right) T(std::forward<Args>(args)...);
+        ++right;
+        ++item_count;
+    }
 
     void push_front(const T& item) {
         check_for_expand();
@@ -152,6 +159,13 @@ public:
         left->~T();
         ++left;
         --item_count;
+    }
+    template<typename... Args>
+    void emplace_front(Args... args) {
+        check_for_expand();
+        --left;
+        new (left) T(std::forward<Args>(args)...);
+        ++item_count;
     }
 
     T& operator[](int n) { return left[n]; }
