@@ -68,31 +68,15 @@ public:
           item_count(rhs.item_count),
           mem_size(rhs.mem_size)
     {
-        rhs.mem_begin = nullptr;
-        rhs.left = nullptr;
-        rhs.right = nullptr;
-        rhs.mem_end = nullptr;
-        rhs.item_count = 0;
+        memset(&rhs, 0, sizeof(Deque));
         rhs.mem_size = first_allocation_size;
     }
     Deque& operator=(Deque&& rhs) {
         destroy_items();
         free(mem_begin);
-
-        mem_begin = rhs.mem_begin;
-        left = rhs.left;
-        right = rhs.right;
-        mem_end = rhs.mem_end;
-        item_count = rhs.item_count;
-        mem_size = rhs.mem_size;
-
-        rhs.mem_begin = nullptr;
-        rhs.left = nullptr;
-        rhs.right = nullptr;
-        rhs.mem_end = nullptr;
-        rhs.item_count = 0;
+        memcpy(this, &rhs, sizeof(Deque));
+        memset(&rhs, 0, sizeof(Deque));
         rhs.mem_size = first_allocation_size;
-
         return *this;
     }
     Deque& operator=(const Deque& rhs) {
